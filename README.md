@@ -1,48 +1,127 @@
-# Automatic preheater tool
+# Automatic Preheater Tool
 
-Is a simple tool to reactivate the preheater in i.e. in VW T5 to survive the cold winter nights.
+A compact DIY solution to automatically reactivate a vehicle preheater (e.g. VW T5) during cold conditions.
 
-The PoC will be an Arduino nano with a DHT11 and a small servo motor to push the button on the remote.
-Later on I thinking about to install it on an WeMos to send the data to a webservice and provide the option to control the temperature.
+[![Ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/W7W51C9X4H)
 
+---
 
-## The basic function
+## Overview
 
-Just a simple tool to trigger the preheater button on the remote.
-The remote should be set to heat for 120 mins. for this concept.
+This project is a simple proof-of-concept (PoC) designed to automate the activation of a vehicle’s preheater remote.
 
-## Housing
+Instead of modifying the vehicle or the heating system itself, this setup physically presses the remote button using a servo motor — triggered based on ambient temperature.
 
-Designed to 3D print in i.e. PLA (will take about 4h)
- * Infill
-	I use 20% for all parts execpt for the "Mid_ButtonTrigger" part - this should be printed soild (100%).
- * Layerheight 
-	Doesn't really matter, I will print it with 300 micron.
- * Support structure
-	No, you shouldn't need it
+The system operates fully offline and is built with inexpensive, widely available components.
 
-## Software
+---
 
-The software will wait for 120mins and start the temperature check all 2 mins. As soon as the temperature drops below 19c. the remote button will be pushed and the loop starts again.
+## How It Works
 
-## BOM
+- The preheater remote is configured to run for **120 minutes**
+- The system checks the ambient temperature every **2 minutes**
+- If the temperature drops below **19°C**, a servo motor presses the remote button
+- This restarts the heating cycle
+- The process repeats indefinitely
 
-* Arduino Nano
-* Servo Motor (I used HS-303)
-* DHT11
-* 3 M5x20 screws
-* some filament for your 3D printer - hope you own one
-* some wires, solder, soldering iron
+---
+
+## Features
+
+- Fully autonomous operation  
+- No modification of vehicle electronics required  
+- Low-cost and easy to replicate  
+- Modular and extendable design  
+
+---
+
+## Hardware
+
+### Bill of Materials (BOM)
+
+- Arduino Nano  
+- Servo Motor (e.g. HS-303)  
+- DHT11 Temperature Sensor  
+- 3× M5x20 screws  
+- Wires  
+- Solder + soldering iron  
+- PLA filament for 3D printing  
+
+---
 
 ## Wiring
 
-Servo:
-Red(+): --> Arduino 5v
-Black(-): --> Arduino ground
-Yellow(Signal): --> Arduino D9
+### Servo Motor
 
-DHT11:
-+: --> Arduino 3.3v
--: --> Arduino ground
-Signal: --> Arduino D4
+| Wire   | Connection        |
+|--------|------------------|
+| Red    | Arduino 5V       |
+| Black  | Arduino GND      |
+| Yellow | Arduino D9       |
 
+### DHT11 Sensor
+
+| Pin    | Connection        |
+|--------|------------------|
+| VCC    | Arduino 3.3V      |
+| GND    | Arduino GND       |
+| Signal | Arduino D4        |
+
+---
+
+## 3D Printed Housing
+
+The enclosure is designed for standard FDM 3D printing.
+
+**Material:** PLA  
+**Estimated print time:** ~4 hours  
+
+### Recommended Print Settings
+
+- **Infill:**  
+  - 20% for all parts  
+  - 100% for `Mid_ButtonTrigger`  
+
+- **Layer Height:**  
+  - 0.3 mm  
+
+- **Supports:**  
+  - Not required  
+
+---
+
+## Software
+
+The control logic is intentionally simple:
+
+1. Wait for the current heating cycle to complete (120 minutes)
+2. Check temperature every 2 minutes
+3. If temperature < 19°C → trigger servo → press button
+4. Repeat loop
+
+---
+
+## License
+
+This project is licensed under the  
+**Creative Commons Attribution 4.0 International (CC BY 4.0)** License.
+
+You are free to:
+
+- Use  
+- Modify  
+- Distribute  
+
+As long as proper credit is given.
+
+Full license text: https://creativecommons.org/licenses/by/4.0/
+
+---
+
+## Disclaimer
+
+This project is a proof-of-concept and provided "as is".
+
+- No guarantee of reliability or safety  
+- Use at your own risk  
+- Not intended for critical or safety-relevant systems  
